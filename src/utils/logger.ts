@@ -1,0 +1,19 @@
+import logger from 'pino';
+import dayjs from 'dayjs';
+import { truncate } from 'lodash';
+
+const log = logger({
+  transport: {
+    target: 'pino-pretty',
+    options: {
+      ignore: 'req.headers,res',
+    },
+  },
+
+  base: {
+    pid: false,
+  },
+  timestamp: () => `,"time":"${dayjs().format()}"`,
+});
+
+export default log;
