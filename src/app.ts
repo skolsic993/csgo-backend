@@ -5,7 +5,7 @@ import logger from './utils/logger';
 import routes from './routes';
 import deserializeUser from './middleware/deserializeUser';
 
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || config.get<number>('port');
 
 const app = express();
 app.use(express.json());
