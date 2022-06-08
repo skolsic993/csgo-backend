@@ -4,7 +4,7 @@
   "description": "Backend",
   "main": "index.js",
   "scripts": {
-    "start": "node ts-node-dev --respawn --transpile-only src/app.ts"
+    "start": "ts-node-dev --respawn --transpile-only node src/app.ts"
   },
   "author": "",
   "license": "ISC",
