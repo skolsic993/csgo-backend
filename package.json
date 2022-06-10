@@ -4,7 +4,8 @@
   "description": "Backend",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only node src/app.ts"
+    "start": "ts-node-dev --respawn --transpile-only src/app.ts ./node_modules/.bin/netlify-lambda serve src",
+    "build": ".node_modules/.bin/netlify-lambda build src"
   },
   "author": "",
   "license": "ISC",
@@ -19,8 +20,10 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.3.1",
     "nanoid": "^3.3.3",
+    "netlify-lambda": "^2.0.15",
     "pino": "^7.11.0",
     "pino-pretty": "^7.6.1",
+    "serverless-http": "^3.0.1",
     "ts-node-dev": "^1.1.8",
     "yup": "^0.32.11",
     "zod": "^3.14.4"

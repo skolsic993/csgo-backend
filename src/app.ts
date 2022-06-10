@@ -8,6 +8,8 @@ import deserializeUser from './middleware/deserializeUser';
 const port = process.env.PORT || config.get<number>('port');
 
 const app = express();
+const serverless = require('serverless-http');
+
 app.use(express.json());
 app.use(deserializeUser);
 
@@ -18,3 +20,5 @@ app.listen(port, async () => {
 
   routes(app);
 });
+
+module.exports.handler = serverless(app);
