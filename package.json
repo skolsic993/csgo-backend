@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev --respawn --transpile-only src/app.ts ./node_modules/bin/netlify-lambda serve src",
-    "build": "tsc ./node_modules/.bin/netlify-lambda build src"
+    "build": "tsc --noEmit ./src/*.ts ./node_modules/.bin/netlify-lambda build src"
   },
   "author": "",
   "license": "ISC",
@@ -42,6 +42,6 @@
     "@types/pino": "^7.0.5",
     "@types/yup": "^0.29.13",
     "ts-node": "^10.7.0",
-    "typescript": "^4.6.4"
+    "typescript": "^4.7.3"
   }
 }
