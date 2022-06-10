@@ -1,1 +1,1 @@
-web: npm src/app.ts
+web:node index.js
