@@ -4,8 +4,8 @@
   "description": "Backend",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only src/app.ts ./node_modules/.bin/netlify-lambda serve src",
-    "build": ".node_modules/.bin/netlify-lambda build src"
+    "start": "ts-node-dev --respawn --transpile-only src/app.ts ./node_modules/bin/netlify-lambda serve src",
+    "build": "./node_modules/.bin/netlify-lambda build src"
   },
   "author": "",
   "license": "ISC",
