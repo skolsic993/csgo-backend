@@ -26,7 +26,6 @@ function routes(app: Express) {
     validateResource(createUserSchema),
     createUserHandler
   );
-
   app.post(
     '/api/signin',
     validateResource(createSessionSchema),
