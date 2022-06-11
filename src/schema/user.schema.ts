@@ -3,8 +3,8 @@ import { object, string, TypeOf } from 'zod';
 export const createUserSchema = object({
   body: object({
     username: string({
-      required_error: 'Username is required!',
-    }).email('Not a valid username!'),
+      required_error: 'Name is required!',
+    }),
     password: string({
       required_error: 'Password is required!',
     }).min(8, 'Password is too short - should be 8 chars minimum!'),
