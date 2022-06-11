@@ -10,7 +10,7 @@ export async function createUser(
   res: Response
 ) {
   try {
-    const user = await findUser({ username: input.username });
+    const user = await findUser({ email: input.email });
 
     if (!user) {
       const user = await UserModel.create(input);
@@ -18,15 +18,15 @@ export async function createUser(
       return omit(user.toJSON(), 'password');
     } else {
       res.status(409);
-      res.send('User with this username already exists!');
+      res.send('User with this Email already exists!');
     }
   } catch (error: any) {
     throw new Error(error);
   }
 }
 
-export async function validatePassword(username: string, password: string) {
-  const user = await UserModel.findOne({ username });
+export async function validatePassword(email: string, password: string) {
+  const user = await UserModel.findOne({ email });
 
   if (!user) return false;
 
@@ -54,7 +54,7 @@ export async function getUser(
     Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>
   >
 ) {
-  const user = await findUser({ username: input.username });
+  const user = await findUser({ email: input.email });
 
   if (!user) return false;
 

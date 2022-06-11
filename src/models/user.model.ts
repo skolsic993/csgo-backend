@@ -3,7 +3,8 @@ import bcrypt from 'bcrypt';
 import config from 'config';
 
 export interface UserDocument extends mongoose.Document {
-  username: string;
+  name: string;
+  email: string;
   password: string;
   comparePassword(candidatePassword: string): Promise<boolean>;
   createdAt: Date;
