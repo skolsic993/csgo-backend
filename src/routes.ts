@@ -22,13 +22,13 @@ function routes(app: Express) {
   app.post('/api/user', getUserHandler);
   app.delete('/api/user', deleteUserHandler);
   app.post(
-    '/api/signup',
+    '/api/auth/signup',
     validateResource(createUserSchema),
     createUserHandler
   );
 
   app.post(
-    '/api/signin',
+    '/api/auth/signin',
     validateResource(createSessionSchema),
     createUserSessionHandler
   );

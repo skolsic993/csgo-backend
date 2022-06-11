@@ -3,8 +3,7 @@ import bcrypt from 'bcrypt';
 import config from 'config';
 
 export interface UserDocument extends mongoose.Document {
-  name: string;
-  email: string;
+  username: string;
   password: string;
   comparePassword(candidatePassword: string): Promise<boolean>;
   createdAt: Date;
@@ -13,8 +12,7 @@ export interface UserDocument extends mongoose.Document {
 
 const userSchema = new mongoose.Schema(
   {
-    email: { type: String, required: true, unique: true },
-    name: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
   },
   {
