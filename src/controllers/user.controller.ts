@@ -37,7 +37,7 @@ export async function getUsersHandler(req: Request, res: Response) {
 
 export async function getUserHandler(req: Request, res: Response) {
   try {
-    const user = await getUser(req.body);
+    const user = await getUser(req.body, res);
 
     return res.send(user);
   } catch (error) {
@@ -51,7 +51,7 @@ export async function deleteUserHandler(req: Request, res: Response) {
   try {
     await deleteUser(req.body);
 
-    res.send('No mroe');
+    res.send('No more');
 
     return res.status(200);
   } catch (error) {

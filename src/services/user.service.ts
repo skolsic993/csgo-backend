@@ -17,7 +17,7 @@ export async function createUser(
 
       return omit(user.toJSON(), 'password');
     } else {
-      res.status(409);
+      res.status(422);
       res.send('User with this Email already exists!');
     }
   } catch (error: any) {
@@ -52,11 +52,15 @@ export async function getUsers() {
 export async function getUser(
   input: DocumentDefinition<
     Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>
-  >
+  >,
+  res: Response
 ) {
   const user = await findUser({ email: input.email });
 
-  if (!user) return false;
+  if (!user) {
+    res.status(422);
+    return { message: "User with this email doesn't exist!" };
+  }
 
   return omit(user, 'password');
 }
