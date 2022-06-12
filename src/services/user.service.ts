@@ -59,10 +59,17 @@ export async function getUser(
 
   if (!user) {
     res.status(422);
-    return { message: 'User with this email already exist!', available: true };
+    return {
+      message: 'There is no user with this email available!',
+      available: true,
+    };
   }
 
-  const response = { ...user, available: 'false' };
+  const response = {
+    ...user,
+    message: 'User with this email already exist!',
+    available: 'false',
+  };
 
   return omit(response, 'password');
 }
