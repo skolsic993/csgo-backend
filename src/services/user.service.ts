@@ -59,10 +59,12 @@ export async function getUser(
 
   if (!user) {
     res.status(422);
-    return { message: "User with this email doesn't exist!" };
+    return { message: "User with this email doesn't exist!", available: false };
   }
 
-  return omit(user, 'password');
+  const response = { ...user, available: 'true' };
+
+  return omit(response, 'password');
 }
 
 export async function deleteUser(
