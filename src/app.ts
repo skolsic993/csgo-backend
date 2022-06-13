@@ -5,9 +5,15 @@ import logger from './utils/logger';
 import routes from './routes';
 import deserializeUser from './middleware/deserializeUser';
 
+const cors = require('cors');
 const port = process.env.PORT || config.get<number>('port');
 
 const app = express();
+app.use(
+  cors({
+    origin: 'http://localhost:4200',
+  })
+);
 const serverless = require('serverless-http');
 
 app.use(express.json());
