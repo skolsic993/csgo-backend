@@ -58,13 +58,14 @@ export async function getUser(
   const user = await findUser({ email: input.email });
 
   if (!user) {
-    res.status(422);
+    res.status(200);
     return {
       message: 'There is no user with this email available!',
       available: true,
     };
   }
 
+  res.status(422);
   const response = {
     ...user,
     message: 'User with this email already exist!',
