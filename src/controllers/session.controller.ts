@@ -14,6 +14,13 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     return res.status(401).send('Invalid email or password!');
   }
 
+  const { accessToken } = await createAccessAndRefreshTokens(user, req);
+  const { refreshToken } = await createAccessAndRefreshTokens(user, req);
+
+  return res.send({ accessToken, refreshToken });
+}
+
+export async function createAccessAndRefreshTokens(user: any, req: Request) {
   const session = await createSession(user._id, req.get('user-agent') || '');
   const accessToken = signJwt(
     { ...user, session: session._id },
@@ -24,7 +31,10 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     { expiresIn: config.get('refreshTokenTime') }
   );
 
-  return res.send({ accessToken, refreshToken });
+  return {
+    accessToken,
+    refreshToken,
+  };
 }
 
 export async function getUserSessionsHandler(req: Request, res: Response) {
