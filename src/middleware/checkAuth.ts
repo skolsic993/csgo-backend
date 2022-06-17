@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const checkAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req;
 
-  console.log(token);
   return next();
 };
 

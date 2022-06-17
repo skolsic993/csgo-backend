@@ -23,9 +23,15 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 }
 
 export async function checkUserAuth(req: Request, res: Response) {
-  const userId = res;
+  const userId = res.locals.user;
+  const sessions = await findSessions({ user: userId });
 
-  return userId;
+  return sessions
+    ? res.send({
+        name: userId.name || null,
+        authenticated: sessions?.valid || false,
+      })
+    : res.send({ name: null, authenticated: false });
 }
 
 export async function createAccessAndRefreshTokens(user: any, req: Request) {

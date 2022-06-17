@@ -11,15 +11,17 @@ export async function createSession(userId: string, userAgent: string) {
   return session.toJSON();
 }
 
-export async function findSessions(query: FilterQuery<SessionDocument>) {
-  return SessionModel.find(query).lean();
+export async function findSessions(
+  query: FilterQuery<SessionDocument>
+): Promise<SessionDocument> {
+  return SessionModel.findOne(query).lean();
 }
 
 export default function updateSession(
   query: FilterQuery<SessionDocument>,
   update: UpdateQuery<SessionDocument>
 ) {
-  return SessionModel.updateOne(query, update);
+  return SessionModel.deleteOne(query, update);
 }
 
 export async function reIssueAccessToken({
