@@ -35,7 +35,7 @@ function routes(app: Express) {
     createUserSessionHandler
   );
 
-  app.get('/api/auth/signin', checkAuth, checkUserAuth);
+  app.get('/api/auth/signedin', checkAuth, checkUserAuth);
 
   app.get('/api/sessions', requireUser, getUserSessionsHandler);
   app.delete('/api/sessions', requireUser, deleteSessionHandler);
