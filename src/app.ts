@@ -11,7 +11,7 @@ const port = process.env.PORT || config.get<number>('port');
 const app = express();
 app.use(
   cors({
-    origin: '*',
+    origin: 'http://localhost:4200',
   })
 );
 const serverless = require('serverless-http');
