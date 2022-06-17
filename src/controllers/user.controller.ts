@@ -21,7 +21,11 @@ export async function createUserHandler(
       req
     );
 
-    res.cookie('express:jwt', accessToken, { httpOnly: true, secure: true });
+    res.cookie('express:jwt', accessToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
     return res.send({ user, accessToken });
   } catch (error) {
     logger.error(error);
