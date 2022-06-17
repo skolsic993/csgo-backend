@@ -21,7 +21,8 @@ export async function createUserHandler(
       req
     );
 
-    return res.send({ user, accessToken, refreshToken });
+    res.cookie('SESSIONID', accessToken, { httpOnly: true, secure: true });
+    return res.send({ user });
   } catch (error) {
     logger.error(error);
 

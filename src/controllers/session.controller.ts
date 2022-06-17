@@ -14,10 +14,18 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     return res.status(401).send('Invalid email or password!');
   }
 
-  const { accessToken } = await createAccessAndRefreshTokens(user, req);
-  const { refreshToken } = await createAccessAndRefreshTokens(user, req);
+  const { accessToken, refreshToken } = await createAccessAndRefreshTokens(
+    user,
+    req
+  );
 
   return res.send({ accessToken, refreshToken });
+}
+
+export async function checkUserAuth(req: Request, res: Response) {
+  const userId = res;
+
+  return userId;
 }
 
 export async function createAccessAndRefreshTokens(user: any, req: Request) {

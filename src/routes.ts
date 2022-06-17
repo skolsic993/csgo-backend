@@ -1,5 +1,6 @@
 import { Express, Request, Response } from 'express';
 import {
+  checkUserAuth,
   createUserSessionHandler,
   deleteSessionHandler,
   getUserSessionsHandler,
@@ -16,6 +17,7 @@ import validateResource from './middleware/validateResource';
 import requireUser from './middleware/requireUser';
 import { getAllLeagues } from './controllers/league.controller';
 import { getAllTournaments } from './controllers/tournament.controller';
+import checkAuth from './middleware/checkAuth';
 
 function routes(app: Express) {
   app.get('/api/users', getUsersHandler);
@@ -32,6 +34,8 @@ function routes(app: Express) {
     validateResource(createSessionSchema),
     createUserSessionHandler
   );
+
+  app.get('/api/auth/signin', checkAuth, checkUserAuth);
 
   app.get('/api/sessions', requireUser, getUserSessionsHandler);
   app.delete('/api/sessions', requireUser, deleteSessionHandler);
