@@ -7,7 +7,7 @@ const checkAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = authHeader && authHeader.split(' ')[1];
 
   if (token === undefined) {
-    return res.sendStatus(401);
+    return res.sendStatus(503);
   }
 
   return next();
