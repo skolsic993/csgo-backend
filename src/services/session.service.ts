@@ -11,7 +11,7 @@ export async function createSession(userId: string, userAgent: string) {
   return session.toJSON();
 }
 
-export async function findSessions(
+export async function findSession(
   query: FilterQuery<SessionDocument>
 ): Promise<SessionDocument> {
   return SessionModel.findOne(query).lean();
