@@ -15,6 +15,7 @@ app.use(
     credentials: true,
   })
 );
+
 const serverless = require('serverless-http');
 
 app.use(express.json());
