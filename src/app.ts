@@ -6,9 +6,11 @@ import routes from './routes';
 import deserializeUser from './middleware/deserializeUser';
 
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
 const port = process.env.PORT || config.get<number>('port');
 
 const app = express();
+app.use(cookieParser)
 app.use(
   cors({
     origin: 'http://localhost:4200',

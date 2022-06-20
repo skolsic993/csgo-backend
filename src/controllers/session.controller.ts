@@ -31,8 +31,6 @@ export async function checkUserAuth(req: Request, res: Response) {
   const userId = res.locals.user;
   const sessions = await findSession({ user: userId });
 
-  console.log(userId, sessions);
-
   return sessions
     ? res.send({
         name: userId.name || null,
