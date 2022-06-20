@@ -4,21 +4,21 @@ import connect from './utils/connect';
 import logger from './utils/logger';
 import routes from './routes';
 import deserializeUser from './middleware/deserializeUser';
+import cookieParser from 'cookie-parser';
 
 const cors = require('cors');
-const cookieParser = require('cookie-parser')
 const port = process.env.PORT || config.get<number>('port');
 
 const app = express();
-app.use(cookieParser)
+const serverless = require('serverless-http');
+
 app.use(
   cors({
     origin: 'http://localhost:4200',
     credentials: true,
-  })
+  }),
+  cookieParser()
 );
-
-const serverless = require('serverless-http');
 
 app.use(express.json());
 app.use(deserializeUser);

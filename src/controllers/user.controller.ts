@@ -21,7 +21,7 @@ export async function createUserHandler(
       req
     );
 
-    res.cookie('express:jwt', accessToken, {
+    res.cookie('express_jwt', accessToken, {
       httpOnly: true,
       secure: true,
       sameSite: 'none',

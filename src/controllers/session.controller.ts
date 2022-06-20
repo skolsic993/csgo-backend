@@ -19,8 +19,9 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     req
   );
 
-  res.cookie('express:jwt.sign', accessToken, {
+  res.cookie('express_jwt', accessToken, {
     httpOnly: true,
+    secure: true,
     sameSite: 'none',
   });
 
