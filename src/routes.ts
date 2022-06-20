@@ -23,17 +23,18 @@ function routes(app: Express) {
   app.get('/api/users', checkAuth, getUsersHandler);
   app.post('/api/user', getUserHandler);
   app.delete('/api/user', deleteUserHandler);
+
   app.post(
     '/api/auth/signup',
     validateResource(createUserSchema),
     createUserHandler
   );
-
   app.post(
     '/api/auth/signin',
     validateResource(createSessionSchema),
     createUserSessionHandler
   );
+  app.post('/api/auth/signout', checkAuth, deleteSessionHandler);
 
   app.get('/api/auth/signedin', checkAuth, checkUserAuth);
 

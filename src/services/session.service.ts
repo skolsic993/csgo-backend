@@ -17,7 +17,7 @@ export async function findSession(
   return SessionModel.findOne(query).lean();
 }
 
-export default function updateSession(
+export default function deleteSession(
   query: FilterQuery<SessionDocument>,
   update: UpdateQuery<SessionDocument>
 ) {
