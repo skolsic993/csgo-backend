@@ -16,7 +16,7 @@ export async function createUserHandler(
   try {
     const user = await createUser(req.body, res);
 
-    const { accessToken, refreshToken } = await createAccessAndRefreshTokens(
+    const { accessToken } = await createAccessAndRefreshTokens(
       user,
       req
     );
@@ -26,7 +26,8 @@ export async function createUserHandler(
       secure: true,
       sameSite: 'none',
     });
-    return res.send({ user, accessToken });
+    
+    return res.send({ user });
   } catch (error) {
     logger.error(error);
 
