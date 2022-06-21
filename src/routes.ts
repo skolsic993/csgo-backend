@@ -20,6 +20,10 @@ import { getAllTournaments } from './controllers/tournament.controller';
 import checkAuth from './middleware/checkAuth';
 
 function routes(app: Express) {
+  app.get('/api/users', checkAuth, getUsersHandler);
+  app.post('/api/user', getUserHandler);
+  app.delete('/api/user', deleteUserHandler);
+
   app.post(
     '/api/auth/signup',
     validateResource(createUserSchema),
