@@ -7,16 +7,17 @@ export async function getAllTournaments(
   req: Request,
   res: Response
 ): Promise<Response<Tournament[]>> {
-  const key = config.get<string>('key');
+  const token = config.get<string>('token');
+  const url: string = 'https://open.faceit.com/data/v4/search/tournaments'
 
   try {
     const response = await axios.get(
-      `https://api.pandascore.co/csgo/tournaments?token=${key}`
+      `${url}?name=${req.body.name}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      }
     );
 
-    const parsedTournaments = getParsedTournaments(response.data);
-
-    return res.send(parsedTournaments);
+    return res.send(response.data);
   } catch (error: any) {
     throw new Error(error);
   }
