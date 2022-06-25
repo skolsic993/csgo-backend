@@ -41,7 +41,7 @@ function routes(app: Express) {
   app.delete('/api/sessions', requireUser, deleteSessionHandler);
 
   app.get('/api/leagues', requireUser, getAllLeagues);
-  app.get('/api/tournaments', requireUser, getAllTournaments);
+  app.get('/api/tournaments', checkAuth, getAllTournaments);
 }
 
 export default routes;
