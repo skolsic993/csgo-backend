@@ -12,7 +12,7 @@ export async function getAllTournaments(
 
   try {
     const response = await axios.get(
-      `${url}?name=${req.body.name}`, {
+      `${url}`, {
         headers: { Authorization: `Bearer ${token}` }
       }
     );
