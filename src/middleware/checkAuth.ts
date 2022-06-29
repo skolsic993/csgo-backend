@@ -8,7 +8,6 @@ const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 
   if (!token) {
     res.send({ name: null, authenticated: false });
-    res.sendStatus(200);
   }
 
   jwt.verify(
