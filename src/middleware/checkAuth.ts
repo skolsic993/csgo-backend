@@ -4,7 +4,7 @@ import config from 'config';
 import jwt from 'jsonwebtoken';
 
 const checkAuth = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers.authorization?.split(' ')[1];
+  const token = req.cookies.express_jwt;
 
   if (!token) {
     return res.send({ name: null, authenticated: false });
