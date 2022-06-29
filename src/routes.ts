@@ -37,8 +37,8 @@ function routes(app: Express) {
   app.post('/api/auth/signout', checkAuth, deleteSessionHandler);
   app.get('/api/auth/signedin', checkAuth, checkUserAuth);
 
-  app.get('/api/tournaments/:name', getAllTournaments);
-  app.get('/api/tournaments/organizer/:id', getTournamentOrganizer);
+  app.get('/api/tournaments/:name', checkAuth, getAllTournaments);
+  app.get('/api/tournaments/organizer/:id', checkAuth, getTournamentOrganizer);
 
   // app.get('/api/sessions', requireUser, getUserSessionsHandler);
   // app.delete('/api/sessions', requireUser, deleteSessionHandler);

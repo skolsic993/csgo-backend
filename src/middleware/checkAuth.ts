@@ -4,10 +4,10 @@ import config from 'config';
 import jwt from 'jsonwebtoken';
 
 const checkAuth = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.cookies.express_jwt;
+  const token = req.headers.authorization?.split(' ')[1];
 
   if (!token) {
-    res.send({ name: null, authenticated: false });
+    return res.send({ name: null, authenticated: false });
   }
 
   jwt.verify(
