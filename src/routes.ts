@@ -27,21 +27,21 @@ function routes(app: Express) {
 
   app.post(
     '/api/auth/signup',
-    validateResource(createUserSchema),
+    [deserializeUser, validateResource(createUserSchema)],
     createUserHandler
   );
   app.post(
     '/api/auth/signin',
-    validateResource(createSessionSchema),
+    [deserializeUser, validateResource(createSessionSchema)],
     createUserSessionHandler
   );
-  app.post('/api/auth/signout', requireUser, deleteSessionHandler);
-  app.get('/api/auth/signedin', checkUserAuth);
+  app.post('/api/auth/signout', [deserializeUser, requireUser], deleteSessionHandler);
+  app.get('/api/auth/signedin', [deserializeUser], checkUserAuth);
 
   app.get('/api/tournaments/:name', requireUser, getAllTournaments);
   // app.get('/api/tournaments/organizer/:id', checkAuth, getTournamentOrganizer);
 
-  // app.get('/api/sessions', requireUser, getUserSessionsHandler);
+  //app.get('/api/sessions', [deserializeUser, requireUser], getUserSessionsHandler);
   // app.delete('/api/sessions', requireUser, deleteSessionHandler);
 
   // app.get('/api/leagues', requireUser, getAllLeagues);

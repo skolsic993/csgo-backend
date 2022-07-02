@@ -16,6 +16,11 @@ export async function createUserHandler(
   try {
     const user = await createUser(req.body, res);
 
+    console.log(res.locals.user);
+  // const sessionId = res.locals.user.session;
+  // res.cookie('express_jwt', '');
+  // await deleteSession({ _id: sessionId }, { valid: false });
+
     const { accessToken } = await createAccessTokens(
       user,
       req

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import deleteSession, {
   createSession,
   findSession,
@@ -15,18 +15,24 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     return res.status(401).send('Invalid email or password!');
   }
 
-  const { accessToken, refreshToken } = await createAccessTokens(
-    user,
-    req
-  );
-
-  res.cookie('express_jwt', accessToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'none',
-  });
-
-  return res.send({ accessToken, refreshToken });
+  const session = await findSession({ user: user._id });
+  
+  if(session === null) {
+    const { accessToken, refreshToken } = await createAccessTokens(
+      user,
+      req
+    );
+  
+    res.cookie('express_jwt', accessToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
+  
+    return res.send({ accessToken, refreshToken });
+  } else {
+    res.send('You are already logged in!');
+  }
 }
 
 export async function checkUserAuth(req: Request, res: Response) {

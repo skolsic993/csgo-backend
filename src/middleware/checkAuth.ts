@@ -6,6 +6,8 @@ import jwt from 'jsonwebtoken';
 const checkAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.express_jwt;
 
+  console.log(req)
+
   if (!token) {
     return res.send({ name: null, authenticated: false });
   }
