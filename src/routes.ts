@@ -43,9 +43,6 @@ function routes(app: Express) {
 
   //app.get('/api/sessions', [deserializeUser, requireUser], getUserSessionsHandler);
   // app.delete('/api/sessions', requireUser, deleteSessionHandler);
-
-  // app.get('/api/leagues', requireUser, getAllLeagues);
-  
 }
 
 export default routes;
