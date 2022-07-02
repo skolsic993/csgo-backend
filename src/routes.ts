@@ -39,7 +39,7 @@ function routes(app: Express) {
   app.get('/api/auth/signedin', [deserializeUser], checkUserAuth);
 
   app.get('/api/tournaments/:name', requireUser, getAllTournaments);
-  // app.get('/api/tournaments/organizer/:id', checkAuth, getTournamentOrganizer);
+  app.get('/api/tournaments/organizer/:id', checkAuth, getTournamentOrganizer);
 
   //app.get('/api/sessions', [deserializeUser, requireUser], getUserSessionsHandler);
   // app.delete('/api/sessions', requireUser, deleteSessionHandler);
