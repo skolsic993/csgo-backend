@@ -14,8 +14,7 @@ const serverless = require('serverless-http');
 
 app.use(
   cors({
-    origin: '*',
-    credentials: true
+    origin: 'http://localhost:4200'
   }),
   cookieParser()
 );
