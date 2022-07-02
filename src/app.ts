@@ -11,11 +11,6 @@ const port = process.env.PORT || config.get<number>('port');
 const app = express();
 const serverless = require('serverless-http');
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
-})
-
 app.use(
   cors({
     origin: 'http://localhost:4200',

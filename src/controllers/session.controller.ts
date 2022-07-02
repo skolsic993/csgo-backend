@@ -16,7 +16,7 @@ export async function createUserSessionHandler(req: Request, res: Response) {
   }
 
   const session = await findSession({ user: user._id });
-  
+
   if(session === null) {
     const { accessToken, refreshToken } = await createAccessTokens(
       user,
