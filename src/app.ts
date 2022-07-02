@@ -3,7 +3,6 @@ import config from 'config';
 import connect from './utils/connect';
 import logger from './utils/logger';
 import routes from './routes';
-import deserializeUser from './middleware/deserializeUser';
 import cookieParser from 'cookie-parser';
 
 const cors = require('cors');
@@ -11,6 +10,11 @@ const port = process.env.PORT || config.get<number>('port');
 
 const app = express();
 const serverless = require('serverless-http');
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
+})
 
 app.use(
   cors({
