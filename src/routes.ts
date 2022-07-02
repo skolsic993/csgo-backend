@@ -22,7 +22,7 @@ import deserializeUser from './middleware/deserializeUser';
 
 function routes(app: Express) {
   // app.get('/api/users', checkAuth, getUsersHandler);
-  // app.post('/api/user', getUserHandler);
+  app.post('/api/user', getUserHandler);
   // app.delete('/api/user', deleteUserHandler);
 
   app.post(
