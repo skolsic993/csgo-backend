@@ -13,7 +13,7 @@ const deserializeUser = async (
   const accessToken = get(req, 'headers.authorization', '').replace(
     /^Bearer\s/,
     ''
-  );
+  ) || req.cookies.express_jwt;
   const refreshToken = get(req, 'headers.x-refresh');
 
   if (!accessToken) {
