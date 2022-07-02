@@ -13,7 +13,9 @@ const app = express();
 const serverless = require('serverless-http');
 
 app.use(
-  cors(),
+  cors({
+    origin: '*'
+  }),
   cookieParser()
 );
 
