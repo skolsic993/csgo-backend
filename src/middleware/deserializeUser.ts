@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { get } from 'lodash';
 import { reIssueAccessToken } from '../services/session.service';
 import { verifyJwt } from '../utils/jwt.utils';
+import jwt from 'jsonwebtoken';
+import config from 'config';
 
 const deserializeUser = async (
   req: Request,
@@ -19,6 +21,8 @@ const deserializeUser = async (
   }
 
   const { decoded, expired } = verifyJwt(accessToken);
+
+  console.log(decoded)
 
   if (decoded) {
     res.locals.user = decoded;

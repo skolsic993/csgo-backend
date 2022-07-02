@@ -18,11 +18,12 @@ import requireUser from './middleware/requireUser';
 import { getAllLeagues } from './controllers/league.controller';
 import { getAllTournaments, getTournamentOrganizer } from './controllers/tournament.controller';
 import checkAuth from './middleware/checkAuth';
+import deserializeUser from './middleware/deserializeUser';
 
 function routes(app: Express) {
-  app.get('/api/users', checkAuth, getUsersHandler);
-  app.post('/api/user', getUserHandler);
-  app.delete('/api/user', deleteUserHandler);
+  // app.get('/api/users', checkAuth, getUsersHandler);
+  // app.post('/api/user', getUserHandler);
+  // app.delete('/api/user', deleteUserHandler);
 
   app.post(
     '/api/auth/signup',
@@ -34,11 +35,11 @@ function routes(app: Express) {
     validateResource(createSessionSchema),
     createUserSessionHandler
   );
-  app.post('/api/auth/signout', checkAuth, deleteSessionHandler);
-  app.get('/api/auth/signedin', checkAuth, checkUserAuth);
+  app.post('/api/auth/signout', requireUser, deleteSessionHandler);
+  app.get('/api/auth/signedin', checkUserAuth);
 
-  app.get('/api/tournaments/:name', checkAuth, getAllTournaments);
-  app.get('/api/tournaments/organizer/:id', checkAuth, getTournamentOrganizer);
+  app.get('/api/tournaments/:name', requireUser, getAllTournaments);
+  // app.get('/api/tournaments/organizer/:id', checkAuth, getTournamentOrganizer);
 
   // app.get('/api/sessions', requireUser, getUserSessionsHandler);
   // app.delete('/api/sessions', requireUser, deleteSessionHandler);

@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import deleteSession, {
   createSession,
@@ -14,7 +15,7 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     return res.status(401).send('Invalid email or password!');
   }
 
-  const { accessToken, refreshToken } = await createAccessAndRefreshTokens(
+  const { accessToken, refreshToken } = await createAccessTokens(
     user,
     req
   );
@@ -32,15 +33,16 @@ export async function checkUserAuth(req: Request, res: Response) {
   const userId = res.locals.user;
   const sessions = await findSession({ user: userId });
 
-  return sessions
-    ? res.send({
-        name: userId.name || null,
-        authenticated: sessions?.valid || false,
-      })
-    : res.send({ name: null, authenticated: false });
+  return sessions ?
+    res.send({
+      name: userId.name || null,
+      authenticated: sessions?.valid || false,
+    })
+  : res.send({ name: null, authenticated: false });
+  
 }
 
-export async function createAccessAndRefreshTokens(user: any, req: Request) {
+export async function createAccessTokens(user: any, req: Request) {
   const session = await createSession(user._id, req.get('user-agent') || '');
   const accessToken = signJwt(
     { ...user, session: session._id },

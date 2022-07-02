@@ -2,7 +2,7 @@ export default {
   port: 1337,
   token: 'b4c6651f-d22a-427d-8754-381a4f75220d',
   dbUri:
-    'mongodb+srv://skolsic993:favorite93@cluster0.fq6rq.mongodb.net/?retryWrites=true&w=majority',
+    'mongodb+srv://skolsic993:favorite93@cluster0.v1sx1.mongodb.net/?retryWrites=true&w=majority',
   saltWorkFactor: 10,
   accessTokenTime: '15m',
   refreshTokenTime: '1y',
