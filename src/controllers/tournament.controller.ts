@@ -32,7 +32,7 @@ export async function getTournamentOrganizer(
 
   try {
     const response = await axios.get(
-      `${url}?name=${req.params.id}`, {
+      `${url}/${req.params.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       }
     );
