@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import deleteSession, {
   createSession,
@@ -18,21 +17,28 @@ export async function createUserSessionHandler(req: Request, res: Response) {
   const session = await findSession({ user: user._id });
 
   if(session === null) {
-    const { accessToken, refreshToken } = await createAccessTokens(
-      user,
-      req
-    );
-  
-    res.cookie('express_jwt', accessToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none',
-    });
-  
-    return res.send({ accessToken, refreshToken });
+    userLogin(user, req, res);
   } else {
-    res.send('You are already logged in!');
+    res.cookie('express_jwt', '');
+    await deleteSession({ _id: session._id }, { valid: false });
+
+    userLogin(user, req, res);
   }
+}
+
+export async function userLogin(user: any, req: Request, res: Response) {
+  const { accessToken, refreshToken } = await createAccessTokens(
+    user,
+    req
+  );
+
+  res.cookie('express_jwt', accessToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+  });
+
+  return res.send({ accessToken, refreshToken });
 }
 
 export async function checkUserAuth(req: Request, res: Response) {
