@@ -49,6 +49,8 @@ export async function getTournamentDetails(
 ): Promise<any> {
   const url = 'https://open.faceit.com/data/v4/tournaments';
 
+  console.log(req.params.id)
+
   try {
     const response = await axios.get(
       `${url}/${req.params.id}`, {

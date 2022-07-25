@@ -40,7 +40,7 @@ function routes(app: Express) {
 
   app.get('/api/tournaments/:name', [deserializeUser, requireUser], getAllTournaments);
   app.get('/api/tournaments/organizer/:id', [deserializeUser, requireUser], getTournamentOrganizer);
-  app.get('/api/tournaments/:id', [deserializeUser, requireUser], getTournamentDetails);
+  app.get('/api/tournaments/:id/details', [deserializeUser, requireUser], getTournamentDetails);
 
   //app.get('/api/sessions', [deserializeUser, requireUser], getUserSessionsHandler);
   // app.delete('/api/sessions', requireUser, deleteSessionHandler);
