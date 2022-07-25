@@ -16,7 +16,7 @@ import { createSessionSchema } from './schema/session.schema';
 import validateResource from './middleware/validateResource';
 import requireUser from './middleware/requireUser';
 import { getAllLeagues } from './controllers/league.controller';
-import { getAllTournaments, getTournamentOrganizer } from './controllers/tournament.controller';
+import { getAllTournaments, getTournamentDetails, getTournamentOrganizer } from './controllers/tournament.controller';
 import checkAuth from './middleware/checkAuth';
 import deserializeUser from './middleware/deserializeUser';
 
@@ -40,6 +40,7 @@ function routes(app: Express) {
 
   app.get('/api/tournaments/:name', [deserializeUser, requireUser], getAllTournaments);
   app.get('/api/tournaments/organizer/:id', [deserializeUser, requireUser], getTournamentOrganizer);
+  app.get('/api/tournaments/:id', [deserializeUser, requireUser], getTournamentDetails);
 
   //app.get('/api/sessions', [deserializeUser, requireUser], getUserSessionsHandler);
   // app.delete('/api/sessions', requireUser, deleteSessionHandler);

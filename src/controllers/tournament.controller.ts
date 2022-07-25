@@ -43,19 +43,21 @@ export async function getTournamentOrganizer(
   }
 }
 
-function getParsedTournaments(tournaments: Tournament[]): Tournament[] {
-  return tournaments.map((tournament) => {
-    const { id, begin_at, end_at, league, teams, matches, live_supported } =
-      tournament;
+export async function getTournamentDetails(
+  req: Request,
+  res: Response
+): Promise<any> {
+  const url = 'https://open.faceit.com/data/v4/tournaments';
 
-    return {
-      id,
-      begin_at,
-      end_at,
-      league,
-      teams,
-      matches,
-      live_supported,
-    } as Tournament;
-  });
+  try {
+    const response = await axios.get(
+      `${url}/${req.params.id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    );
+
+    return res.send(response.data);
+  } catch (error: any) {
+    throw new Error(error);
+  }
 }
