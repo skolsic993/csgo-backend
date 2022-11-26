@@ -1,23 +1,23 @@
-import { Express, Request, Response } from 'express';
+import { Express } from 'express';
+import { getAllLeagues } from './controllers/league.controller';
 import {
   checkUserAuth,
   createUserSessionHandler,
   deleteSessionHandler,
   getUserSessionsHandler,
 } from './controllers/session.controller';
+import { getAllTournaments } from './controllers/tournament.controller';
 import {
   createUserHandler,
   deleteUserHandler,
   getUserHandler,
   getUsersHandler,
 } from './controllers/user.controller';
-import { createUserSchema } from './schema/user.schema';
-import { createSessionSchema } from './schema/session.schema';
-import validateResource from './middleware/validateResource';
-import requireUser from './middleware/requireUser';
-import { getAllLeagues } from './controllers/league.controller';
-import { getAllTournaments } from './controllers/tournament.controller';
 import checkAuth from './middleware/checkAuth';
+import requireUser from './middleware/requireUser';
+import validateResource from './middleware/validateResource';
+import { createSessionSchema } from './schema/session.schema';
+import { createUserSchema } from './schema/user.schema';
 
 function routes(app: Express) {
   app.get('/api/users', checkAuth, getUsersHandler);

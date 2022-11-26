@@ -1,7 +1,7 @@
+import { Response } from 'express';
+import { omit } from 'lodash';
 import { DocumentDefinition, FilterQuery } from 'mongoose';
 import UserModel, { UserDocument } from '../models/user.model';
-import { omit } from 'lodash';
-import { Response } from 'express';
 
 export async function createUser(
   input: DocumentDefinition<

@@ -2,7 +2,7 @@ export default {
   port: 1337,
   key: '9DLmKDPtUxNfN4mnVNS7Z3L-Yq9BbMuulJsmpYpg-kQKCJyWr88',
   dbUri:
-    'mongodb+srv://skolsic993:favorite93@cluster0.fq6rq.mongodb.net/?retryWrites=true&w=majority',
+    'mongodb+srv://skolsic993:Favorite93@cluster0.lrukrik.mongodb.net/?retryWrites=true&w=majority',
   saltWorkFactor: 10,
   accessTokenTime: '259200',
   refreshTokenTime: '1y',

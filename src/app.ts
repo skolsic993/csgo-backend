@@ -1,13 +1,13 @@
+import cookieParser from 'cookie-parser';
 import express from 'express';
-import config from 'config';
+import deserializeUser from './middleware/deserializeUser';
+import routes from './routes';
 import connect from './utils/connect';
 import logger from './utils/logger';
-import routes from './routes';
-import deserializeUser from './middleware/deserializeUser';
-import cookieParser from 'cookie-parser';
 
 const cors = require('cors');
-const port = process.env.PORT || config.get<number>('port');
+//process.env.PORT || config.get<number>('port')
+const port = 1337;
 
 const app = express();
 const serverless = require('serverless-http');

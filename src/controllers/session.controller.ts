@@ -1,3 +1,4 @@
+import config from 'config';
 import { Request, Response } from 'express';
 import deleteSession, {
   createSession,
@@ -5,7 +6,6 @@ import deleteSession, {
 } from '../services/session.service';
 import { validatePassword } from '../services/user.service';
 import { signJwt } from '../utils/jwt.utils';
-import config from 'config';
 
 export async function createUserSessionHandler(req: Request, res: Response) {
   const user = await validatePassword(req.body.email, req.body.password);
@@ -25,7 +25,7 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     sameSite: 'none',
   });
 
-  return res.send({ accessToken, refreshToken });
+  return res.send({ user, accessToken, refreshToken });
 }
 
 export async function checkUserAuth(req: Request, res: Response) {
@@ -36,6 +36,7 @@ export async function checkUserAuth(req: Request, res: Response) {
     ? res.send({
         name: userId.name || null,
         authenticated: sessions?.valid || false,
+        nick: userId.nick || null,
       })
     : res.send({ name: null, authenticated: false });
 }
