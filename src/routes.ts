@@ -4,11 +4,16 @@ import {
   createUserSessionHandler,
   deleteSessionHandler,
 } from './controllers/session.controller';
-import { getAllTournaments } from './controllers/tournament.controller';
+import {
+  getAllTournaments,
+  getTournamentDetails,
+  getTournamentOrganizer,
+} from './controllers/tournament.controller';
 import {
   createUserHandler,
   getUserHandler,
 } from './controllers/user.controller';
+import deserializeUser from './middleware/deserializeUser';
 import requireUser from './middleware/requireUser';
 import validateResource from './middleware/validateResource';
 import { createSessionSchema } from './schema/session.schema';

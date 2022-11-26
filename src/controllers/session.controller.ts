@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 import config from 'config';
 import { Request, Response } from 'express';
-=======
-import { Request, Response, NextFunction } from 'express';
->>>>>>> 99bdc055b2ba0602f3c865b3894473c205656089
 import deleteSession, {
   createSession,
-  findSession
+  findSession,
 } from '../services/session.service';
 import { validatePassword } from '../services/user.service';
 import { signJwt } from '../utils/jwt.utils';
@@ -20,7 +16,7 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 
   const session = await findSession({ user: user._id });
 
-  if(session === null) {
+  if (session === null) {
     userLogin(user, req, res);
   } else {
     res.cookie('express_jwt', '');
@@ -31,10 +27,7 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 }
 
 export async function userLogin(user: any, req: Request, res: Response) {
-  const { accessToken, refreshToken } = await createAccessTokens(
-    user,
-    req
-  );
+  const { accessToken, refreshToken } = await createAccessTokens(user, req);
 
   res.cookie('express_jwt', accessToken, {
     httpOnly: true,
