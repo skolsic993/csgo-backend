@@ -7,8 +7,7 @@ const checkAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.express_jwt;
 
   if (!token) {
-    res.send({ name: null, authenticated: false });
-    res.sendStatus(200);
+    return res.send({ name: null, authenticated: false });
   }
 
   jwt.verify(

@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 import config from 'config';
 import { Request, Response } from 'express';
+=======
+import { Request, Response, NextFunction } from 'express';
+>>>>>>> 99bdc055b2ba0602f3c865b3894473c205656089
 import deleteSession, {
   createSession,
-  findSession,
+  findSession
 } from '../services/session.service';
 import { validatePassword } from '../services/user.service';
 import { signJwt } from '../utils/jwt.utils';
@@ -14,7 +18,20 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     return res.status(401).send('Invalid email or password!');
   }
 
-  const { accessToken, refreshToken } = await createAccessAndRefreshTokens(
+  const session = await findSession({ user: user._id });
+
+  if(session === null) {
+    userLogin(user, req, res);
+  } else {
+    res.cookie('express_jwt', '');
+    await deleteSession({ _id: session._id }, { valid: false });
+
+    userLogin(user, req, res);
+  }
+}
+
+export async function userLogin(user: any, req: Request, res: Response) {
+  const { accessToken, refreshToken } = await createAccessTokens(
     user,
     req
   );
@@ -41,7 +58,7 @@ export async function checkUserAuth(req: Request, res: Response) {
     : res.send({ name: null, authenticated: false });
 }
 
-export async function createAccessAndRefreshTokens(user: any, req: Request) {
+export async function createAccessTokens(user: any, req: Request) {
   const session = await createSession(user._id, req.get('user-agent') || '');
   const accessToken = signJwt(
     { ...user, session: session._id },

@@ -7,7 +7,7 @@ import {
   getUsers,
 } from '../services/user.service';
 import { CreateUserInput } from '../schema/user.schema';
-import { createAccessAndRefreshTokens } from './session.controller';
+import { createAccessTokens } from './session.controller';
 
 export async function createUserHandler(
   req: Request<{}, {}, CreateUserInput['body']>,
@@ -16,7 +16,12 @@ export async function createUserHandler(
   try {
     const user = await createUser(req.body, res);
 
-    const { accessToken } = await createAccessAndRefreshTokens(
+    console.log(res.locals.user);
+  // const sessionId = res.locals.user.session;
+  // res.cookie('express_jwt', '');
+  // await deleteSession({ _id: sessionId }, { valid: false });
+
+    const { accessToken } = await createAccessTokens(
       user,
       req
     );
