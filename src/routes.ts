@@ -1,5 +1,9 @@
 import { Express } from 'express';
 import {
+  getUserByNickname,
+  getUserStats,
+} from './controllers/faceit-user-controller';
+import {
   checkUserAuth,
   createUserSessionHandler,
   deleteSessionHandler,
@@ -56,6 +60,13 @@ function routes(app: Express) {
     [deserializeUser, requireUser],
     getTournamentDetails
   );
+
+  app.get(
+    '/api/nickname/:name',
+    [deserializeUser, requireUser],
+    getUserByNickname
+  );
+  app.get('/api/stats/:id', [deserializeUser, requireUser], getUserStats);
 
   //app.get('/api/sessions', [deserializeUser, requireUser], getUserSessionsHandler);
   // app.delete('/api/sessions', requireUser, deleteSessionHandler);

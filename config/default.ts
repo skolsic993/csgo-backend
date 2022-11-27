@@ -4,7 +4,7 @@ export default {
   dbUri:
     'mongodb+srv://skolsic993:Favorite93@cluster0.lrukrik.mongodb.net/?retryWrites=true&w=majority',
   saltWorkFactor: 10,
-  accessTokenTime: '15m',
+  accessTokenTime: '5h',
   refreshTokenTime: '1y',
   publicKey: `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvX+faxOSAkRdGtRLo27l

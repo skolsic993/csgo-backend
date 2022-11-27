@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import logger from './../utils/logger';
+import { CreateUserInput } from '../schema/user.schema';
 import {
   createUser,
   deleteUser,
   getUser,
   getUsers,
 } from '../services/user.service';
-import { CreateUserInput } from '../schema/user.schema';
+import logger from './../utils/logger';
 import { createAccessTokens } from './session.controller';
 
 export async function createUserHandler(
@@ -15,23 +15,18 @@ export async function createUserHandler(
 ) {
   try {
     const user = await createUser(req.body, res);
+    // const sessionId = res.locals.user.session;
+    // res.cookie('express_jwt', '');
+    // await deleteSession({ _id: sessionId }, { valid: false });
 
-    console.log(res.locals.user);
-  // const sessionId = res.locals.user.session;
-  // res.cookie('express_jwt', '');
-  // await deleteSession({ _id: sessionId }, { valid: false });
-
-    const { accessToken } = await createAccessTokens(
-      user,
-      req
-    );
+    const { accessToken } = await createAccessTokens(user, req);
 
     res.cookie('express_jwt', accessToken, {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
     });
-    
+
     return res.send({ user });
   } catch (error) {
     logger.error(error);
