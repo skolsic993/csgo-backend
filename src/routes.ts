@@ -1,5 +1,7 @@
 import { Express } from 'express';
 import {
+  getFriendsList,
+  getPlayerById,
   getUserByNickname,
   getUserStats,
 } from './controllers/faceit-user-controller';
@@ -67,6 +69,12 @@ function routes(app: Express) {
     getUserByNickname
   );
   app.get('/api/stats/:id', [deserializeUser, requireUser], getUserStats);
+  app.get('/api/players/:id', [deserializeUser, requireUser], getPlayerById);
+  app.get(
+    '/api/friends/:friends',
+    [deserializeUser, requireUser],
+    getFriendsList
+  );
 
   //app.get('/api/sessions', [deserializeUser, requireUser], getUserSessionsHandler);
   // app.delete('/api/sessions', requireUser, deleteSessionHandler);
