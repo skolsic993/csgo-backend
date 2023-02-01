@@ -1,11 +1,11 @@
 export default {
   port: 1337,
-  token: 'b4c6651f-d22a-427d-8754-381a4f75220d',
+  token: "b4c6651f-d22a-427d-8754-381a4f75220d",
   dbUri:
-    'mongodb+srv://skolsic993:Favorite93@cluster0.lisvl4q.mongodb.net/?retryWrites=true&w=majority',
+    "mongodb+srv://skolsic993:Favorite93@cluster0.3wukrn5.mongodb.net/?retryWrites=true&w=majority",
   saltWorkFactor: 10,
-  accessTokenTime: '5h',
-  refreshTokenTime: '1y',
+  accessTokenTime: "5h",
+  refreshTokenTime: "1y",
   publicKey: `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvX+faxOSAkRdGtRLo27l
 DRpzzFfSOpBL8apXsxhH5kl+jUGOeDwrV3ohm4Z/Bu9FT3u97q2LzuF6ZXgFavsZ
