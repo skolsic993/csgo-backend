@@ -1,14 +1,14 @@
-import axios from 'axios';
-import config from 'config';
-import { Request, Response } from 'express';
+import axios from "axios";
+import config from "config";
+import { Request, Response } from "express";
 
-const token = config.get<string>('token');
+const token = config.get<string>("token");
 
 export async function getUserByNickname(
   req: Request,
   res: Response
 ): Promise<any> {
-  const url = 'https://open.faceit.com/data/v4/players';
+  const url = "https://open.faceit.com/data/v4/players";
 
   try {
     const response = await axios.get(`${url}?nickname=${req.params.name}`, {
@@ -22,7 +22,7 @@ export async function getUserByNickname(
 }
 
 export async function getUserStats(req: Request, res: Response): Promise<any> {
-  const url = 'https://open.faceit.com/data/v4/players';
+  const url = "https://open.faceit.com/data/v4/players";
 
   try {
     const response = await axios.get(`${url}/${req.params.id}/stats/csgo`, {
@@ -36,7 +36,7 @@ export async function getUserStats(req: Request, res: Response): Promise<any> {
 }
 
 export async function getUserHubs(req: Request, res: Response): Promise<any> {
-  const url = 'https://open.faceit.com/data/v4/players';
+  const url = "https://open.faceit.com/data/v4/players";
 
   try {
     const response = await axios.get(`${url}/${req.params.id}/hubs`, {
@@ -49,8 +49,22 @@ export async function getUserHubs(req: Request, res: Response): Promise<any> {
   }
 }
 
+export async function getRanks(req: Request, res: Response): Promise<any> {
+  const url = "https://open.faceit.com/data/v4/rankings/games/csgo/regions";
+
+  try {
+    const response = await axios.get(`${url}/${req.params.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return res.send(response.data);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
 export async function getPlayerById(req: Request, res: Response): Promise<any> {
-  const url = 'https://open.faceit.com/data/v4/players';
+  const url = "https://open.faceit.com/data/v4/players";
 
   try {
     const response = await axios.get(`${url}/${req.params.id}`, {
@@ -67,8 +81,8 @@ export async function getFriendsList(
   req: Request,
   res: Response
 ): Promise<any> {
-  const url = 'https://open.faceit.com/data/v4/players';
-  const ids = req.params.friends.split('&&');
+  const url = "https://open.faceit.com/data/v4/players";
+  const ids = req.params.friends.split("&&");
 
   try {
     let friendsList: any = await Promise.all(

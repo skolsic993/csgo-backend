@@ -1,19 +1,19 @@
-import cookieParser from 'cookie-parser';
-import express from 'express';
-import routes from './routes';
-import connect from './utils/connect';
-import logger from './utils/logger';
+import cookieParser from "cookie-parser";
+import express from "express";
+import routes from "./routes";
+import connect from "./utils/connect";
+import logger from "./utils/logger";
 
-const cors = require('cors');
+const cors = require("cors");
 //process.env.PORT || config.get<number>('port')
 const port = 1337;
 
 const app = express();
-const serverless = require('serverless-http');
+const serverless = require("serverless-http");
 
 app.use(
   cors({
-    origin: 'http://localhost:4200',
+    origin: "http://localhost:4200",
     credentials: true,
   }),
   cookieParser()

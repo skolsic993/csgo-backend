@@ -1,6 +1,6 @@
-import { Serie } from './serie.model';
-import { Match } from './match.model';
 import { League } from './league.model';
+import { Match } from './match.model';
+import { Serie } from './serie.model';
 import { Team } from './team.model';
 
 export interface Tournament {

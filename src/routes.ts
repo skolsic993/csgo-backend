@@ -2,6 +2,7 @@ import { Express } from 'express';
 import {
   getFriendsList,
   getPlayerById,
+  getRanks,
   getUserByNickname,
   getUserHubs,
   getUserStats,
@@ -15,6 +16,7 @@ import {
   getAllTournaments,
   getTournamentDetails,
   getTournamentOrganizer,
+  getTournaments,
 } from './controllers/tournament.controller';
 import {
   createUserHandler,
@@ -27,9 +29,7 @@ import { createSessionSchema } from './schema/session.schema';
 import { createUserSchema } from './schema/user.schema';
 
 function routes(app: Express) {
-  // app.get('/api/users', checkAuth, getUsersHandler);
   app.post('/api/user', getUserHandler);
-  // app.delete('/api/user', deleteUserHandler);
 
   app.post(
     '/api/auth/signup',
@@ -48,6 +48,7 @@ function routes(app: Express) {
   );
   app.get('/api/auth/signedin', [deserializeUser], checkUserAuth);
 
+  app.get('/api/tournaments', [deserializeUser, requireUser], getTournaments);
   app.get(
     '/api/tournaments/:name',
     [deserializeUser, requireUser],
@@ -79,8 +80,7 @@ function routes(app: Express) {
 
   app.get('/api/hubs/:id', [deserializeUser, requireUser], getUserHubs);
 
-  //app.get('/api/sessions', [deserializeUser, requireUser], getUserSessionsHandler);
-  // app.delete('/api/sessions', requireUser, deleteSessionHandler);
+  app.get('/api/ranks/:id', [deserializeUser, requireUser], getRanks);
 }
 
 export default routes;
