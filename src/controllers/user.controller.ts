@@ -54,6 +54,10 @@ export async function getUsersHandler(req: Request, res: Response) {
   }
 }
 
+export async function getCurrentUser(req: Request, res: Response) {
+  return res.send(res.locals.user);
+}
+
 export async function getUserHandler(req: Request, res: Response) {
   try {
     const user = await getUser(req.body, res);

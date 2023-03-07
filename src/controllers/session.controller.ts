@@ -35,6 +35,24 @@ export async function userLogin(user: any, req: Request, res: Response) {
     sameSite: "none",
   });
 
+  res.cookie("accessToken", accessToken, {
+    maxAge: 900000,
+    httpOnly: true,
+    domain: "localhost",
+    path: "/",
+    sameSite: "strict",
+    secure: false,
+  });
+
+  res.cookie("refreshToken", refreshToken, {
+    maxAge: 3.154e10,
+    httpOnly: true,
+    domain: "localhost",
+    path: "/",
+    sameSite: "strict",
+    secure: false,
+  });
+
   return res.send({ user, accessToken, refreshToken });
 }
 
