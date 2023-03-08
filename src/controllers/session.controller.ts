@@ -97,6 +97,9 @@ export async function deleteSessionHandler(req: Request, res: Response) {
   const sessionId = res.locals.user.session;
 
   res.cookie("express_jwt", "");
+  res.cookie("accessToken", "");
+  res.cookie("refreshToken", "");
+
   await deleteSession({ _id: sessionId }, { valid: false });
 
   return res.send({
