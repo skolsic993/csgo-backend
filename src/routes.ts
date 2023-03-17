@@ -1,4 +1,5 @@
 import { Express } from "express";
+import { getChampionships } from "./controllers/championship-controller";
 import {
   getFriendsList,
   getPlayerById,
@@ -59,6 +60,11 @@ function routes(app: Express) {
     "/api/tournaments/organizer/:id",
     [deserializeUser, requireUser],
     getTournamentOrganizer
+  );
+  app.get(
+    "/api/championships",
+    [deserializeUser, requireUser],
+    getChampionships
   );
   app.get(
     "/api/tournaments/:id/details",
