@@ -1,5 +1,9 @@
 import { Express } from "express";
-import { getChampionships } from "./controllers/championship-controller";
+import {
+  getChampionshipDetails,
+  getChampionships,
+  getChampionshipSubscriptions,
+} from "./controllers/championship-controller";
 import {
   getFriendsList,
   getPlayerById,
@@ -8,6 +12,7 @@ import {
   getUserHubs,
   getUserStats,
 } from "./controllers/faceit-user-controller";
+import { getMatchDetails, getMatches } from "./controllers/matches-controller";
 import {
   checkUserAuth,
   createUserSessionHandler,
@@ -31,6 +36,7 @@ import { createSessionSchema } from "./schema/session.schema";
 import { createUserSchema } from "./schema/user.schema";
 
 function routes(app: Express) {
+  //Auth
   app.post("/api/user", getUserHandler);
 
   app.post(
@@ -50,6 +56,7 @@ function routes(app: Express) {
   );
   app.get("/api/auth/signedin", [deserializeUser], checkUserAuth);
 
+  //Tournament
   app.get("/api/tournaments", [deserializeUser, requireUser], getTournaments);
   app.get(
     "/api/tournaments/:name",
@@ -62,16 +69,37 @@ function routes(app: Express) {
     getTournamentOrganizer
   );
   app.get(
-    "/api/championships",
-    [deserializeUser, requireUser],
-    getChampionships
-  );
-  app.get(
     "/api/tournaments/:id/details",
     [deserializeUser, requireUser],
     getTournamentDetails
   );
 
+  //Championship
+  app.get(
+    "/api/championships",
+    [deserializeUser, requireUser],
+    getChampionships
+  );
+  app.get(
+    "/api/championships/:id/details",
+    [deserializeUser, requireUser],
+    getChampionshipDetails
+  );
+  app.get(
+    "/api/championships/:id/subscriptions",
+    [deserializeUser, requireUser],
+    getChampionshipSubscriptions
+  );
+
+  //Matches
+  app.get("/api/matches/:id", [deserializeUser, requireUser], getMatches);
+  app.get(
+    "/api/matches/:id/details",
+    [deserializeUser, requireUser],
+    getMatchDetails
+  );
+
+  //Faceit Account
   app.get("/api/me", [deserializeUser, requireUser], getCurrentUser);
   app.get(
     "/api/nickname/:name",
@@ -86,8 +114,10 @@ function routes(app: Express) {
     getFriendsList
   );
 
+  //Hubs
   app.get("/api/hubs/:id", [deserializeUser, requireUser], getUserHubs);
 
+  //Ranks
   app.get("/api/ranks/:id", [deserializeUser, requireUser], getRanks);
 }
 
