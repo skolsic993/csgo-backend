@@ -37,3 +37,17 @@ export async function getMatchDetails(
     throw new Error(error);
   }
 }
+
+export async function getMatchStats(req: Request, res: Response): Promise<any> {
+  const url = "https://open.faceit.com/data/v4/matches";
+
+  try {
+    const response = await axios.get(`${url}/${req.params.id}/stats`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return res.send(response.data);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}

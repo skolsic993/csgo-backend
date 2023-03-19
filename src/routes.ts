@@ -12,7 +12,11 @@ import {
   getUserHubs,
   getUserStats,
 } from "./controllers/faceit-user-controller";
-import { getMatchDetails, getMatches } from "./controllers/matches-controller";
+import {
+  getMatchDetails,
+  getMatches,
+  getMatchStats,
+} from "./controllers/matches-controller";
 import {
   checkUserAuth,
   createUserSessionHandler,
@@ -97,6 +101,11 @@ function routes(app: Express) {
     "/api/matches/:id/details",
     [deserializeUser, requireUser],
     getMatchDetails
+  );
+  app.get(
+    "/api/matches/:id/stats",
+    [deserializeUser, requireUser],
+    getMatchStats
   );
 
   //Faceit Account
