@@ -70,6 +70,7 @@ export async function checkUserAuth(req: Request, res: Response) {
 }
 
 export async function createAccessTokens(user: any, req: Request) {
+  console.log(user);
   const session = await createSession(user._id, req.get("user-agent") || "");
   const accessToken = signJwt(
     { ...user, session: session._id },

@@ -1,8 +1,8 @@
+//Origin mongodb+srv://skolsic993:Favorite93@cluster0.rhv6tdj.mongodb.net/?retryWrites=true&w=majority
 export default {
   port: 1337,
   token: "b4c6651f-d22a-427d-8754-381a4f75220d",
-  dbUri:
-    "mongodb+srv://skolsic993:Favorite93@cluster0.rhv6tdj.mongodb.net/?retryWrites=true&w=majority",
+  dbUri: "mongodb://skolsic993:Favorite93!@localhost:27017",
   saltWorkFactor: 10,
   accessTokenTime: "5h",
   refreshTokenTime: "1y",
