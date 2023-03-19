@@ -47,7 +47,6 @@ import { createUserSchema } from "./schema/user.schema";
 function routes(app: Express) {
   //Auth
   app.post("/api/user", getUserHandler);
-
   app.post(
     "/api/auth/signup",
     [deserializeUser, validateResource(createUserSchema)],
