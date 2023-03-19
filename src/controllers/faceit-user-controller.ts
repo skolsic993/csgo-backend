@@ -35,20 +35,6 @@ export async function getUserStats(req: Request, res: Response): Promise<any> {
   }
 }
 
-export async function getUserHubs(req: Request, res: Response): Promise<any> {
-  const url = "https://open.faceit.com/data/v4/players";
-
-  try {
-    const response = await axios.get(`${url}/${req.params.id}/hubs`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    return res.send(response.data);
-  } catch (error: any) {
-    throw new Error(error);
-  }
-}
-
 export async function getRanks(req: Request, res: Response): Promise<any> {
   const url = "https://open.faceit.com/data/v4/rankings/games/csgo/regions";
 

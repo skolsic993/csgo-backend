@@ -9,9 +9,14 @@ import {
   getPlayerById,
   getRanks,
   getUserByNickname,
-  getUserHubs,
   getUserStats,
 } from "./controllers/faceit-user-controller";
+import {
+  getUserHubDetails,
+  getUserHubMembers,
+  getUserHubRoles,
+  getUserHubs,
+} from "./controllers/hubs-controller";
 import {
   getMatchDetails,
   getMatches,
@@ -125,6 +130,21 @@ function routes(app: Express) {
 
   //Hubs
   app.get("/api/hubs/:id", [deserializeUser, requireUser], getUserHubs);
+  app.get(
+    "/api/hubs/:id/details",
+    [deserializeUser, requireUser],
+    getUserHubDetails
+  );
+  app.get(
+    "/api/hubs/:id/members",
+    [deserializeUser, requireUser],
+    getUserHubMembers
+  );
+  app.get(
+    "/api/hubs/:id/roles",
+    [deserializeUser, requireUser],
+    getUserHubRoles
+  );
 
   //Ranks
   app.get("/api/ranks/:id", [deserializeUser, requireUser], getRanks);
