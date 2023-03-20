@@ -9,6 +9,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=Favorite93!
   mongo-express:
     image: mongo-express
+    restart: always
     ports:
       - 8080:8081
     environment:
