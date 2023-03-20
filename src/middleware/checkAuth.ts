@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
-import config from 'config';
+import { NextFunction, Request, Response } from "express";
+import config from "./../config/default";
 
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 const checkAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.express_jwt;
@@ -12,8 +12,8 @@ const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 
   jwt.verify(
     token,
-    config.get<string>('privateKey'),
-    { algorithms: ['RS256'] },
+    config?.privateKey,
+    { algorithms: ["RS256"] },
     (error: any, decodedToken: any) => {
       res.locals.user = decodedToken;
     }

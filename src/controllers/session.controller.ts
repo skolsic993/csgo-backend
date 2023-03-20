@@ -1,4 +1,3 @@
-import config from "config";
 import { Request, Response } from "express";
 import deleteSession, {
   createSession,
@@ -6,6 +5,7 @@ import deleteSession, {
 } from "../services/session.service";
 import { validatePassword } from "../services/user.service";
 import { signJwt } from "../utils/jwt.utils";
+import config from "./../config/default";
 
 export async function createUserSessionHandler(req: Request, res: Response) {
   const user = await validatePassword(req.body.email, req.body.password);
@@ -70,15 +70,14 @@ export async function checkUserAuth(req: Request, res: Response) {
 }
 
 export async function createAccessTokens(user: any, req: Request) {
-  console.log(user);
   const session = await createSession(user._id, req.get("user-agent") || "");
   const accessToken = signJwt(
     { ...user, session: session._id },
-    { expiresIn: config.get("accessTokenTime") }
+    { expiresIn: config?.accessTokenTime }
   );
   const refreshToken = signJwt(
     { ...user, session: session._id },
-    { expiresIn: config.get("refreshTokenTime") }
+    { expiresIn: config?.refreshTokenTime }
   );
 
   return {

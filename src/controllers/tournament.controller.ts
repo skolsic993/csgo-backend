@@ -1,9 +1,9 @@
 import axios from "axios";
-import config from "config";
 import { Request, Response } from "express";
 import { Tournament } from "../models/tournament.model";
+import config from "./../config/default";
 
-const token = config.get<string>("token");
+const token = config?.token;
 
 export async function getAllTournaments(
   req: Request,
